@@ -1,0 +1,46 @@
+@startuml
+!theme plain
+
+abstract class Product <<abstract>> {
+  - productId: String
+  - quantity: int
+  + getProductId(): String
+  + getQuantity(): int
+  + addQuantity(amount: int): void
+}
+
+class ConcreteProduct {
+  - productId: String
+  - quantity: int
+  + getProductId(): String
+  + getQuantity(): int
+  + addQuantity(amount: int): void
+}
+
+abstract class ProductFactory <<abstract>> {
+  + createProduct(productId: String, quantity: int): Product
+}
+
+class ConcreteProductFactory {
+  + createProduct(productId: String, quantity: int): Product
+}
+
+class InventoryManager {
+  - logger: InventoryLogger
+  + updateInventory(product: Product, amount: int): void
+}
+
+class InventoryLogger {
+  + logInventoryChange(productId: String, change: int): void
+}
+
+Product <|.. ConcreteProduct
+ProductFactory <|.. ConcreteProductFactory
+ProductFactory ..> Product
+InventoryManager --> Product
+InventoryManager --> InventoryLogger
+InventoryLogger --> Product
+@enduml
+
+
+link://www.plantuml.com/plantuml/png/nLBHIiD047o_hrZVActp0Q64Ga4eA5JyWZLtf85aBrxs2aNzTyyqjyfTqHV1nzsPpCnERZioElPzfsxuQ7e3GuSjAONF8pki6UeEnn4EpceVfiqc0bK5hmfW3SC5skiIdjYrr4pR5u_4BPzBQ8d3PWcDuKEaBcuZEKAFCpyWyWLgBMlihIUUiC0usLQhTwKkuNQMQcVOn93_d-jwUtTXOzqvBt498J_A0Oii-afoHwUPcfUGUFsL_9vEXZuL7v2mCMukkRDD6Cel-7vQJAP-qC5Ka6WhuYluwQScYlCXmK-0tH6fCTUkgISarPKt_5OKQLqggItd29PIYwAIkhAMrkjVmBIuxtCgi3MaVTzz0000
